@@ -123,6 +123,31 @@ accent:    #8fff95  (glow highlights)
 - OG image is at `public/og-image.png`
 - Privacy and Terms pages get page-specific `<title>`, `<meta description>`, and `<link rel="canonical">` injected by the prerender script
 
+## Mobile Responsiveness
+
+The site is fully responsive across phone, tablet, and desktop. All mobile-specific styles use Tailwind responsive prefixes so the desktop experience is untouched.
+
+### Breakpoint Strategy
+
+Uses default Tailwind breakpoints:
+- **Base** (< 640px) — phones (iPhone SE, iPhone 14 Pro, etc.)
+- **`sm:` 640px** — large phones / small tablets
+- **`md:` 768px** — tablets (iPad). Navigation links + CTA button appear in navbar
+- **`lg:` 1024px** — desktops. Full HeroAnimation SVG appears, mobile orb hides
+
+### Key Patterns
+
+- **Navbar:** Hamburger menu (`md:hidden`) with AnimatePresence dropdown on mobile. CTA button hidden below `md:`. Logo scales down on phones (`w-8 h-8 md:w-10 md:h-10`).
+- **Hero:** `min-h-[85vh] lg:min-h-screen`. Heading scales `text-5xl md:text-7xl lg:text-8xl`. Animated gradient orb (`flex lg:hidden`) replaces the full HeroAnimation on mobile.
+- **Button glow:** Idle breathing animation (scale/opacity pulse) runs always so touch devices see glow life without hover. Hover variant takes over on desktop.
+- **SocialProof carousel:** Dynamic `itemWidth` via resize hook (220px phone / 280px tablet / 350px desktop). Icons and text scale with `sm:` prefixes.
+- **Background blobs:** Scaled down on mobile (e.g., `w-[300px] md:w-[500px]`).
+- **CTA section:** Glow blob, padding, and heading sizes all use responsive prefixes.
+
+### Testing Mobile Changes
+
+Use Chrome DevTools device toolbar (Cmd+Option+I then Cmd+Shift+M) with iPhone SE (375px) and iPhone 14 Pro (393px). Always verify desktop (1280px+) is unchanged. Test on real iOS Safari when possible for blur/backdrop-blur rendering.
+
 ## Notes
 
 - Tailwind is processed at build time via PostCSS — CSS output contains only used classes.
