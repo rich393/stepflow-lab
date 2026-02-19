@@ -42,7 +42,7 @@ export const Hero: React.FC = () => {
           >
             AI Workflow <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-white/50">
-              Automation.
+              Intelligence.
             </span>
           </motion.h1>
 
