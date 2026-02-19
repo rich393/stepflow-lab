@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button } from './ui/Button';
 import { motion } from 'framer-motion';
+import { navigate } from '../App';
 
 export const CTA: React.FC = () => {
   return (
@@ -35,8 +36,8 @@ export const CTA: React.FC = () => {
               <p className="mt-1">Website build and maintenance by Stepflow Lab.</p>
            </div>
            <div className="flex gap-6 mt-4 md:mt-0">
-              <a href="#privacy" className="hover:text-white transition-colors">Privacy</a>
-              <a href="#terms" className="hover:text-white transition-colors">Terms</a>
+              <a href="/privacy" onClick={(e) => { e.preventDefault(); navigate('/privacy'); }} className="hover:text-white transition-colors">Privacy</a>
+              <a href="/terms" onClick={(e) => { e.preventDefault(); navigate('/terms'); }} className="hover:text-white transition-colors">Terms</a>
            </div>
         </footer>
       </div>

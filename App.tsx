@@ -9,22 +9,30 @@ import { CTA } from './components/CTA';
 import { PrivacyPolicy } from './components/PrivacyPolicy';
 import { Terms } from './components/Terms';
 
-const getPage = (hash: string) => {
-  if (hash === '#privacy') return 'privacy';
-  if (hash === '#terms') return 'terms';
+const getPage = (pathname: string) => {
+  if (pathname === '/privacy' || pathname === '/privacy/') return 'privacy';
+  if (pathname === '/terms' || pathname === '/terms/') return 'terms';
   return 'home';
 };
 
+export const navigate = (path: string) => {
+  window.history.pushState({}, '', path);
+  window.dispatchEvent(new PopStateEvent('popstate'));
+};
+
 const App: React.FC = () => {
-  const [page, setPage] = useState(() => getPage(window.location.hash));
+  const [page, setPage] = useState(() => {
+    if (typeof window === 'undefined') return 'home';
+    return getPage(window.location.pathname);
+  });
 
   useEffect(() => {
-    const onHashChange = () => {
-      setPage(getPage(window.location.hash));
+    const onPopState = () => {
+      setPage(getPage(window.location.pathname));
       window.scrollTo(0, 0);
     };
-    window.addEventListener('hashchange', onHashChange);
-    return () => window.removeEventListener('hashchange', onHashChange);
+    window.addEventListener('popstate', onPopState);
+    return () => window.removeEventListener('popstate', onPopState);
   }, []);
 
   if (page === 'privacy') return <PrivacyPolicy />;

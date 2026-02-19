@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { LogoWordmark } from './Logo';
 import { ArrowLeft } from 'lucide-react';
+import { navigate } from '../App';
 
 export const PrivacyPolicy: React.FC = () => {
   return (
@@ -9,11 +10,11 @@ export const PrivacyPolicy: React.FC = () => {
       {/* Top bar */}
       <nav className="sticky top-0 z-50 px-6 py-6 bg-brand-dark/80 backdrop-blur-md border-b border-white/5">
         <div className="max-w-4xl mx-auto flex items-center justify-between">
-          <a href="#" className="flex items-center gap-3 text-gray-400 hover:text-white transition-colors text-sm">
+          <a href="/" onClick={(e) => { e.preventDefault(); navigate('/'); }} className="flex items-center gap-3 text-gray-400 hover:text-white transition-colors text-sm">
             <ArrowLeft className="w-4 h-4" />
             Back to home
           </a>
-          <a href="#" className="cursor-pointer">
+          <a href="/" onClick={(e) => { e.preventDefault(); navigate('/'); }} className="cursor-pointer">
             <LogoWordmark logoClassName="w-8 h-8 pointer-events-none" textClassName="text-xl" className="pointer-events-none" />
           </a>
         </div>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { LogoWordmark } from './Logo';
 import { Button } from './ui/Button';
+import { navigate } from '../App';
 
 export const Navbar: React.FC = () => {
   return (
@@ -8,11 +9,11 @@ export const Navbar: React.FC = () => {
       <div className="max-w-7xl mx-auto">
         <div className="pointer-events-auto relative isolate bg-surface-glass backdrop-blur-md border border-white/10 rounded-3xl px-8 py-4 flex items-center justify-between shadow-lg" style={{ transform: 'translateZ(0)', willChange: 'transform' }}>
           <a
-            href="#"
+            href="/"
             onClick={(e) => {
               e.preventDefault();
-              if (window.location.hash === '#privacy') {
-                window.location.hash = '';
+              if (window.location.pathname !== '/') {
+                navigate('/');
               } else {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }

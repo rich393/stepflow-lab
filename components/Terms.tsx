@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { LogoWordmark } from './Logo';
 import { ArrowLeft } from 'lucide-react';
+import { navigate } from '../App';
 
 export const Terms: React.FC = () => {
   return (
@@ -9,11 +10,11 @@ export const Terms: React.FC = () => {
       {/* Top bar */}
       <nav className="sticky top-0 z-50 px-6 py-6 bg-brand-dark/80 backdrop-blur-md border-b border-white/5">
         <div className="max-w-4xl mx-auto flex items-center justify-between">
-          <a href="#" className="flex items-center gap-3 text-gray-400 hover:text-white transition-colors text-sm">
+          <a href="/" onClick={(e) => { e.preventDefault(); navigate('/'); }} className="flex items-center gap-3 text-gray-400 hover:text-white transition-colors text-sm">
             <ArrowLeft className="w-4 h-4" />
             Back to home
           </a>
-          <a href="#" className="cursor-pointer">
+          <a href="/" onClick={(e) => { e.preventDefault(); navigate('/'); }} className="cursor-pointer">
             <LogoWordmark logoClassName="w-8 h-8 pointer-events-none" textClassName="text-xl" className="pointer-events-none" />
           </a>
         </div>
@@ -35,7 +36,7 @@ export const Terms: React.FC = () => {
           <h2 className="text-xl font-semibold text-white mb-4">1. Introduction</h2>
           <p className="text-gray-300 leading-relaxed mb-4">
             This page (our "Terms of Use") and the documents referred to in it, together with our{' '}
-            <a href="#privacy" className="text-brand-primary hover:text-brand-accent transition-colors">Privacy Policy</a>{' '}
+            <a href="/privacy" onClick={(e) => { e.preventDefault(); navigate('/privacy'); }} className="text-brand-primary hover:text-brand-accent transition-colors">Privacy Policy</a>{' '}
             (the "Agreement"), set out the terms on which you may make use of this website and the services offered by Stepflow Lab.
           </p>
           <p className="text-gray-300 leading-relaxed mb-4">

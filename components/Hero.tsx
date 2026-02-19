@@ -34,15 +34,15 @@ export const Hero: React.FC = () => {
           </motion.div>
 
           {/* Dominant Headline */}
-          <motion.h1 
+          <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
             className="text-6xl md:text-7xl lg:text-8xl font-bold tracking-tighter leading-[0.9] text-white mb-6"
           >
-            Scale with <br />
+            AI Workflow <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-white/50">
-              Intelligence.
+              Automation.
             </span>
           </motion.h1>
 
