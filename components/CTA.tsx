@@ -5,9 +5,9 @@ import { navigate } from '../App';
 
 export const CTA: React.FC = () => {
   return (
-    <section className="py-28 relative overflow-hidden flex items-center justify-center">
+    <section className="py-16 md:py-28 relative overflow-hidden flex items-center justify-center">
       {/* Background Glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-brand-primary/20 blur-[120px] rounded-full pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[250px] md:w-[800px] md:h-[400px] bg-brand-primary/20 blur-[120px] rounded-full pointer-events-none" />
 
       <div className="container mx-auto px-6 relative z-10 text-center">
         <motion.div
@@ -16,7 +16,7 @@ export const CTA: React.FC = () => {
            viewport={{ once: true }}
            transition={{ duration: 0.5 }}
         >
-           <h2 className="text-5xl md:text-7xl font-bold tracking-tighter mb-8">
+           <h2 className="text-4xl md:text-5xl lg:text-7xl font-bold tracking-tighter mb-8">
              Ready to evolve?
            </h2>
            <p className="text-xl text-gray-400 mb-10 max-w-2xl mx-auto">
@@ -36,8 +36,8 @@ export const CTA: React.FC = () => {
               <p className="mt-1">Website build and maintenance by Stepflow Lab.</p>
            </div>
            <div className="flex gap-6 mt-4 md:mt-0">
-              <a href="/privacy" onClick={(e) => { e.preventDefault(); navigate('/privacy'); }} className="hover:text-white transition-colors">Privacy</a>
-              <a href="/terms" onClick={(e) => { e.preventDefault(); navigate('/terms'); }} className="hover:text-white transition-colors">Terms</a>
+              <a href="/privacy" onClick={(e) => { e.preventDefault(); navigate('/privacy'); }} className="hover:text-white transition-colors py-2">Privacy</a>
+              <a href="/terms" onClick={(e) => { e.preventDefault(); navigate('/terms'); }} className="hover:text-white transition-colors py-2">Terms</a>
            </div>
         </footer>
       </div>

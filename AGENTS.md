@@ -17,16 +17,19 @@ This workspace is exclusively for editing and deploying the **Stepflow Lab** web
 
 ```
 stepflow-lab/
-├── index.html            # Entry point (SEO meta tags, fonts, links to CSS)
+├── index.html            # Entry point (SEO meta tags, fonts, JSON-LD, links to CSS)
 ├── index.css             # Tailwind directives + custom styles (scrollbar, etc.)
-├── index.tsx             # React root render
-├── App.tsx               # Main app component
+├── index.tsx             # React root render (hydrates prerendered HTML or fresh render)
+├── App.tsx               # Main app component (path-based routing, exports navigate())
+├── entry-server.tsx      # SSR entry point for prerendering (used at build time only)
 ├── types.ts              # Shared TypeScript types
 ├── tailwind.config.ts    # Tailwind theme (brand colors, animations, fonts)
 ├── postcss.config.js     # PostCSS config for Tailwind
 ├── vite.config.ts        # Vite configuration
 ├── tsconfig.json         # TypeScript configuration
 ├── package.json          # Dependencies and scripts
+├── scripts/
+│   └── prerender.mjs     # Post-build script: renders routes to static HTML
 ├── components/           # Page sections
 │   ├── Navbar.tsx
 │   ├── Hero.tsx
@@ -57,9 +60,28 @@ stepflow-lab/
 ```bash
 npm install        # Install dependencies
 npm run dev        # Start dev server on localhost:3000
-npm run build      # Production build → dist/
+npm run build      # Production build → dist/ (includes SSR build + prerender)
 npm run preview    # Preview production build locally
 ```
+
+### Build Pipeline
+
+The `npm run build` command runs three steps in sequence:
+
+1. `vite build` — client-side bundle → `dist/`
+2. `vite build --ssr entry-server.tsx --outDir dist/server` — SSR bundle for prerendering
+3. `node scripts/prerender.mjs` — renders `/`, `/privacy`, `/terms` to static HTML, injects page-specific meta tags, then cleans up the server build
+
+The result is fully prerendered static HTML in `dist/` that Vercel serves directly. The client-side JS hydrates on top of the prerendered content.
+
+### Routing
+
+The site uses path-based routing (not hash-based):
+- `/` — homepage
+- `/privacy` — privacy policy
+- `/terms` — terms of use
+
+Client-side navigation uses `navigate()` exported from `App.tsx` (calls `history.pushState`). The prerender script generates `dist/index.html`, `dist/privacy/index.html`, and `dist/terms/index.html` so Vercel serves each as a static file.
 
 ## Deployment (Vercel)
 
@@ -93,10 +115,13 @@ accent:    #8fff95  (glow highlights)
 
 ## SEO
 
-- Meta description, Open Graph, and Twitter card tags are in `index.html`
-- JSON-LD structured data for `ProfessionalService` schema is in `index.html`
-- `robots.txt` and `sitemap.xml` are in `public/`
+- **Prerendering:** All pages are prerendered to static HTML at build time for immediate crawler visibility (no JS execution required)
+- **Google Search Console:** Verified and active for `https://www.stepflowlab.com` — sitemap submitted, indexing requested
+- Meta description, Open Graph (`og:type`, `og:url`, `og:title`, `og:description`, `og:image`, `og:image:width`, `og:image:height`, `og:site_name`, `og:locale`), and Twitter card tags are in `index.html`
+- JSON-LD structured data for `ProfessionalService` schema is in `index.html` (includes `@id`, `contactPoint`, `image`, `priceRange`)
+- `robots.txt` and `sitemap.xml` (with `<lastmod>` dates) are in `public/`
 - OG image is at `public/og-image.png`
+- Privacy and Terms pages get page-specific `<title>`, `<meta description>`, and `<link rel="canonical">` injected by the prerender script
 
 ## Notes
 

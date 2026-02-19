@@ -34,7 +34,7 @@ export const Button: React.FC<ButtonProps> = ({
   };
 
   // Surface styles (The actual visible button background for primary)
-  const primarySurfaceClass = "bg-brand-primary shadow-[0_0_20px_-5px_rgba(101,231,102,0.4)] transition-all duration-300 group-hover:shadow-[0_0_30px_-5px_rgba(101,231,102,0.6)]";
+  const primarySurfaceClass = "bg-brand-primary shadow-[0_0_25px_-4px_rgba(101,231,102,0.5)] transition-all duration-300 group-hover:shadow-[0_0_30px_-5px_rgba(101,231,102,0.6)]";
 
   return (
     <motion.button
@@ -58,9 +58,14 @@ export const Button: React.FC<ButtonProps> = ({
             className="absolute inset-0 bg-brand-primary rounded-2xl -z-20"
             variants={{
                 idle: {
-                    scale: 1,
-                    opacity: 0.5, 
-                    filter: "blur(10px)",
+                    scale: [1, 1.02, 1],
+                    opacity: [0.4, 0.6, 0.4],
+                    filter: "blur(12px)",
+                    transition: {
+                        duration: 3,
+                        repeat: Infinity,
+                        ease: "easeInOut"
+                    }
                 },
                 hover: {
                     scale: [1, 1.05, 1], 
@@ -85,7 +90,16 @@ export const Button: React.FC<ButtonProps> = ({
           <motion.div
              className="absolute inset-0 rounded-2xl -z-30 border border-brand-primary/30"
              variants={{
-                idle: { opacity: 0, scale: 1 },
+                idle: {
+                    opacity: [0, 0.15, 0],
+                    scale: [1, 1.15, 1],
+                    borderWidth: ["1px", "0px", "1px"],
+                    transition: {
+                        duration: 4,
+                        repeat: Infinity,
+                        ease: "easeOut"
+                    }
+                },
                 hover: {
                     scale: [1, 1.5],
                     opacity: [0.5, 0], // Reduced max opacity for subtlety

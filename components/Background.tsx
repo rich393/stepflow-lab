@@ -86,9 +86,9 @@ export const Background: React.FC = () => {
       />
 
       {/* Gradient Blobs */}
-      <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-brand-tertiary/20 rounded-full blur-[120px] animate-blob" />
-      <div className="absolute top-[40%] right-[-10%] w-[600px] h-[600px] bg-brand-secondary/10 rounded-full blur-[120px] animate-blob animation-delay-2000" />
-      <div className="absolute bottom-[-10%] left-[20%] w-[400px] h-[400px] bg-brand-primary/10 rounded-full blur-[100px] animate-blob animation-delay-4000" />
+      <div className="absolute top-[-10%] left-[-10%] w-[300px] h-[300px] md:w-[500px] md:h-[500px] bg-brand-tertiary/20 rounded-full blur-[120px] animate-blob" />
+      <div className="absolute top-[40%] right-[-10%] w-[350px] h-[350px] md:w-[600px] md:h-[600px] bg-brand-secondary/10 rounded-full blur-[120px] animate-blob animation-delay-2000" />
+      <div className="absolute bottom-[-10%] left-[20%] w-[250px] h-[250px] md:w-[400px] md:h-[400px] bg-brand-primary/10 rounded-full blur-[100px] animate-blob animation-delay-4000" />
 
       {/* Particles Canvas */}
       <canvas ref={canvasRef} className="absolute inset-0 opacity-30" />

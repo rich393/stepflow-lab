@@ -17,12 +17,25 @@ const brands = [
 
 // Create a safe buffer for infinite scrolling
 const ALL_BRANDS = [...brands, ...brands, ...brands, ...brands];
-const ITEM_WIDTH = 350; // Increased width for more breathing room
 const START_INDEX = brands.length; // Start at the beginning of the second set
+
+const getItemWidth = () => {
+  if (typeof window === 'undefined') return 350;
+  if (window.innerWidth < 640) return 220;
+  if (window.innerWidth < 768) return 280;
+  return 350;
+};
 
 export const SocialProof: React.FC = () => {
   const [index, setIndex] = useState(START_INDEX);
   const [isResetting, setIsResetting] = useState(false);
+  const [itemWidth, setItemWidth] = useState(getItemWidth);
+
+  useEffect(() => {
+    const handleResize = () => setItemWidth(getItemWidth());
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -55,49 +68,49 @@ export const SocialProof: React.FC = () => {
             POWERED BY INDUSTRY-LEADING PLATFORMS
          </p>
       </div>
-      
+
       {/* Carousel Container */}
-      <div className="relative h-48 flex items-center justify-center">
-        
+      <div className="relative h-36 sm:h-48 flex items-center justify-center">
+
 
         {/* Sliding Track */}
         <div className="w-full flex justify-start items-center overflow-hidden">
-             <motion.div 
+             <motion.div
                 className="flex items-center gap-0"
-                animate={{ 
-                    x: `calc(-${index * ITEM_WIDTH}px + 50vw - ${ITEM_WIDTH / 2}px)` 
+                animate={{
+                    x: `calc(-${index * itemWidth}px + 50vw - ${itemWidth / 2}px)`
                 }}
                 transition={ isResetting ? { duration: 0 } : { type: "spring", stiffness: 120, damping: 20, mass: 1 } }
                 onAnimationComplete={handleAnimationComplete}
              >
                 {ALL_BRANDS.map((brand, i) => (
-                    <div 
-                        key={i} 
+                    <div
+                        key={i}
                         className="flex-shrink-0 flex flex-col items-center justify-center gap-6"
-                        style={{ width: ITEM_WIDTH }}
+                        style={{ width: itemWidth }}
                     >
                         {/* Wrapper for scaling effect */}
-                        <motion.div 
+                        <motion.div
                             className="flex flex-col items-center transition-all duration-500"
                             animate={{
                                 opacity: Math.abs(index - i) < 2 ? 1 : 0.3,
                                 // Scale Logic: Active is 1 (crisp native size), Inactive scales down to 0.6
-                                scale: index === i ? 1 : 0.6, 
+                                scale: index === i ? 1 : 0.6,
                                 filter: index === i ? "grayscale(0%)" : "grayscale(100%) blur(1px)"
                             }}
                         >
-                            {/* Icon - Increased padding to p-12 (was p-10) to reduce logo size by ~10% */}
-                            <div className="h-32 w-32 flex items-center justify-center p-8">
-                                <img 
-                                    src={`https://cdn.simpleicons.org/${brand.slug}/white`} 
+                            {/* Icon */}
+                            <div className="h-20 w-20 sm:h-32 sm:w-32 flex items-center justify-center p-5 sm:p-8">
+                                <img
+                                    src={`https://cdn.simpleicons.org/${brand.slug}/white`}
                                     alt={brand.name}
-                                    className="h-full w-full object-contain drop-shadow-[0_0_20px_rgba(255,255,255,0.2)]" 
+                                    className="h-full w-full object-contain drop-shadow-[0_0_20px_rgba(255,255,255,0.2)]"
                                     loading="lazy"
                                 />
                             </div>
-                            
+
                             {/* Wordmark */}
-                            <span className="text-2xl font-bold text-gray-300 tracking-tight mt-2">
+                            <span className="text-base sm:text-2xl font-bold text-gray-300 tracking-tight mt-2">
                                 {brand.name}
                             </span>
                         </motion.div>

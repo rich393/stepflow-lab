@@ -10,7 +10,7 @@ export const Hero: React.FC = () => {
   const y2 = useTransform(scrollY, [0, 500], [0, -50]); // Parallax visual
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center pt-28 pb-16 overflow-hidden">
+    <section className="relative min-h-[85vh] lg:min-h-screen flex items-center justify-center pt-28 pb-12 lg:pt-28 lg:pb-16 overflow-hidden">
       
       <div className="container mx-auto px-6 relative z-10 grid lg:grid-cols-2 gap-12 items-center">
         
@@ -38,7 +38,7 @@ export const Hero: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-6xl md:text-7xl lg:text-8xl font-bold tracking-tighter leading-[0.9] text-white mb-6"
+            className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter leading-[0.9] text-white mb-6"
           >
             AI Workflow <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-white/50">
@@ -67,6 +67,51 @@ export const Hero: React.FC = () => {
               Let's talk
             </Button>
           </motion.div>
+        </motion.div>
+
+        {/* Mobile Visual - Animated Gradient Orb */}
+        <motion.div
+          className="flex lg:hidden justify-center items-center my-8"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+        >
+          <div className="relative w-48 h-48 sm:w-56 sm:h-56">
+            {/* Outer glow ring */}
+            <motion.div
+              className="absolute inset-0 rounded-full bg-brand-primary/10 blur-2xl"
+              animate={{
+                scale: [1, 1.15, 1],
+                opacity: [0.3, 0.5, 0.3],
+              }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+            />
+            {/* Inner orb with radial gradient */}
+            <motion.div
+              className="absolute inset-4 rounded-full"
+              style={{
+                background: "radial-gradient(circle at 40% 40%, rgba(101,231,102,0.3), rgba(77,195,122,0.15) 50%, rgba(33,126,109,0.05) 80%, transparent 100%)",
+              }}
+              animate={{
+                scale: [1, 1.05, 1],
+                opacity: [0.8, 1, 0.8],
+              }}
+              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+            />
+            {/* Core bright point */}
+            <motion.div
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-brand-primary"
+              animate={{
+                opacity: [0.6, 1, 0.6],
+                boxShadow: [
+                  "0 0 20px 8px rgba(101,231,102,0.2)",
+                  "0 0 30px 12px rgba(101,231,102,0.4)",
+                  "0 0 20px 8px rgba(101,231,102,0.2)",
+                ],
+              }}
+              transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+            />
+          </div>
         </motion.div>
 
         {/* Right Visual - Abstract Representation */}
