@@ -139,10 +139,10 @@ Uses default Tailwind breakpoints:
 
 - **Navbar:** Hamburger menu (`md:hidden`) with AnimatePresence dropdown on mobile. CTA button hidden below `md:`. Logo scales down on phones (`w-8 h-8 md:w-10 md:h-10`).
 - **Hero:** `min-h-[85vh] lg:min-h-screen`. Heading scales `text-5xl md:text-7xl lg:text-8xl`. Animated gradient orb (`flex lg:hidden`) replaces the full HeroAnimation on mobile.
-- **Button glow:** Idle breathing animation (scale/opacity pulse) runs always so touch devices see glow life without hover. Hover variant takes over on desktop.
+- **Button glow:** On phones (< `sm:`), the core pulsing layer, all three ripple layers, and box-shadow glow are completely hidden (`hidden sm:block`, `shadow-none sm:shadow-[...]`) because mobile browsers render large blurs as visible blobs. On `sm:` and above, the full glow system is active: idle breathing animation + hover ripples.
 - **SocialProof carousel:** Dynamic `itemWidth` via resize hook (220px phone / 280px tablet / 350px desktop). Icons and text scale with `sm:` prefixes.
 - **Background blobs:** Scaled down on mobile (e.g., `w-[300px] md:w-[500px]`).
-- **CTA section:** Glow blob, padding, and heading sizes all use responsive prefixes.
+- **CTA section:** Background glow blob is hidden on phones (`hidden sm:block`) to avoid blur rendering issues. Padding and heading sizes use responsive prefixes.
 
 ### Testing Mobile Changes
 
