@@ -7,7 +7,7 @@ export const CTA: React.FC = () => {
   return (
     <section className="py-16 md:py-28 relative overflow-hidden flex items-center justify-center">
       {/* Background Glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[250px] md:w-[800px] md:h-[400px] bg-brand-primary/20 blur-[120px] rounded-full pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 hidden sm:block sm:w-[400px] sm:h-[250px] md:w-[800px] md:h-[400px] bg-brand-primary/20 blur-[120px] rounded-full pointer-events-none" />
 
       <div className="container mx-auto px-6 relative z-10 text-center">
         <motion.div

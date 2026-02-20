@@ -34,7 +34,7 @@ export const Button: React.FC<ButtonProps> = ({
   };
 
   // Surface styles (The actual visible button background for primary)
-  const primarySurfaceClass = "bg-brand-primary shadow-[0_0_25px_-4px_rgba(101,231,102,0.5)] transition-all duration-300 group-hover:shadow-[0_0_30px_-5px_rgba(101,231,102,0.6)]";
+  const primarySurfaceClass = "bg-brand-primary shadow-none sm:shadow-[0_0_25px_-4px_rgba(101,231,102,0.5)] transition-all duration-300 sm:group-hover:shadow-[0_0_30px_-5px_rgba(101,231,102,0.6)]";
 
   return (
     <motion.button
@@ -53,9 +53,9 @@ export const Button: React.FC<ButtonProps> = ({
       {/* ---------------- PRIMARY VARIANT LAYERS ---------------- */}
       {variant === 'primary' && (
         <>
-          {/* 1. Core Pulsing Layer (The Stone) */}
+          {/* 1. Core Pulsing Layer (The Stone) — hidden on phones where blur renders as blob */}
           <motion.div
-            className="absolute inset-0 bg-brand-primary rounded-2xl -z-20"
+            className="absolute inset-0 bg-brand-primary rounded-2xl -z-20 hidden sm:block"
             variants={{
                 idle: {
                     scale: [1, 1.02, 1],
@@ -86,9 +86,9 @@ export const Button: React.FC<ButtonProps> = ({
             Staggered delays create the wave train effect.
           */}
 
-          {/* Ripple 1 */}
+          {/* Ripple 1 — hidden on phones */}
           <motion.div
-             className="absolute inset-0 rounded-2xl -z-30 border border-brand-primary/30"
+             className="absolute inset-0 rounded-2xl -z-30 border border-brand-primary/30 hidden sm:block"
              variants={{
                 idle: {
                     opacity: [0, 0.15, 0],
@@ -113,9 +113,9 @@ export const Button: React.FC<ButtonProps> = ({
              }}
           />
           
-          {/* Ripple 2 */}
+          {/* Ripple 2 — hidden on phones */}
           <motion.div
-             className="absolute inset-0 rounded-2xl -z-30 border border-brand-primary/30"
+             className="absolute inset-0 rounded-2xl -z-30 border border-brand-primary/30 hidden sm:block"
              variants={{
                 idle: { opacity: 0, scale: 1 },
                 hover: {
@@ -132,9 +132,9 @@ export const Button: React.FC<ButtonProps> = ({
              }}
           />
 
-          {/* Ripple 3 */}
+          {/* Ripple 3 — hidden on phones */}
           <motion.div
-             className="absolute inset-0 rounded-2xl -z-30 border border-brand-primary/30"
+             className="absolute inset-0 rounded-2xl -z-30 border border-brand-primary/30 hidden sm:block"
              variants={{
                 idle: { opacity: 0, scale: 1 },
                 hover: {
