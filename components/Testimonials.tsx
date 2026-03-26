@@ -38,7 +38,7 @@ export const Testimonials: React.FC = () => {
           Some words from <br className="md:hidden" /> happy clients.
         </motion.h2>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
           {testimonials.map((t, i) => (
             <motion.div
               key={i}
@@ -47,18 +47,18 @@ export const Testimonials: React.FC = () => {
               whileHover={{ y: -10, boxShadow: "0 20px 40px -15px rgba(0,0,0,0.15)" }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1, duration: 0.4 }}
-              className="group flex flex-col justify-between p-8 rounded-2xl bg-gray-100 text-gray-900 relative overflow-hidden transition-all"
+              className={`group flex flex-col justify-between p-8 rounded-2xl bg-gray-100 text-gray-900 relative overflow-hidden transition-all${i === 2 ? ' md:col-span-2 md:max-w-[calc(50%-1rem)] md:mx-auto' : ''}`}
             >
               {/* Highlight effect on hover (Inverted for light card) */}
               <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-50 transition-opacity duration-500" />
-              
-              <div className="relative z-10">
+
+              <div className="relative z-10 flex-1 flex flex-col justify-center">
                 <div className="mb-8 flex items-center gap-2 opacity-60">
                   <span className="font-bold uppercase tracking-wider text-xs border border-gray-400 px-2 py-1 rounded">
                      {t.company}
                   </span>
                 </div>
-                
+
                 <p className="text-xl md:text-2xl font-medium leading-tight mb-8">
                   "{t.quote}"
                 </p>
