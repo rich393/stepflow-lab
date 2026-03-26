@@ -15,6 +15,13 @@ const testimonials = [
     role: "Founder",
     quote: "The infrastructure they built led us to acquiring 4x the number of Retailers stocking our brand within 9 months.",
     outcome: "4x New Retailers signed within 9 months"
+  },
+  {
+    company: "AccuPrice",
+    author: "Bruce",
+    role: "Co-Founder",
+    quote: "Richard has automated for efficiency and he's capturing quality leads for us. I most definitely recommend him he is a very personable guy he cares about his projects and he sees things through! Thank you Richard",
+    outcome: "Multiple Cold Email Campaigns running"
   }
 ];
 
@@ -31,7 +38,7 @@ export const Testimonials: React.FC = () => {
           Some words from <br className="md:hidden" /> happy clients.
         </motion.h2>
 
-        <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {testimonials.map((t, i) => (
             <motion.div
               key={i}
